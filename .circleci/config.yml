@@ -1,0 +1,26 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run: npm install --save-dev jest
+      - run: npm run test
+
+  deploy:
+    docker:
+    - image: buildpack-deps:trusty
+    steps:
+    - checkout
+    - run:
+        name: Deploy Master to Heroku
+        command: |
+          git push https://heroku:$HEROKU_API_KEY@git.heroku.com/thedarkula-helloworld-js.git master
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test
+      - deploy

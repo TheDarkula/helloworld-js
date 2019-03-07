@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "http-server"
   },
   "devDependencies": {
     "jest": "^24.3.0"
